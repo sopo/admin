@@ -6,7 +6,7 @@ import UserGuard from "./guards/user-guard";
 import DashboardLayout from "../layouts/dashboard/dashboard-layout";
 import Users from "../pages/dashboard/users/users";
 import Articles from "../pages/dashboard/articles";
-import UpdateUsers from "../pages/dashboard/users/views/update-users/update-users";
+import EditUser from "../pages/dashboard/users/views/update-users/edit-user";
 import AddUser from "../pages/dashboard/users/views/add-user";
 
 export const routes: RouteObject[] = [
@@ -28,7 +28,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: "users/edit/:id",
-        element: <UpdateUsers />,
+        element: <EditUser />,
       },
       {
         path: "users/add",
