@@ -6,6 +6,7 @@ import { UserAtom } from "../../../../../store/auth";
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getUser } from "../../../../../api/get-user";
+import { editUser } from "../../../../../api/edit-user";
 const { Item } = Form;
 
 const EditUser: React.FC = () => {
@@ -39,6 +40,7 @@ const EditUser: React.FC = () => {
     return <Navigate to="/sign-in" />;
   }
   const handleSubmit = (values: RegisterProps) => {
+    editUser(id, values)
     console.log(values);
   };
 
