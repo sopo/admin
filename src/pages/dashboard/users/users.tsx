@@ -1,11 +1,16 @@
 import { Table } from "antd";
-import { getUsers } from "../../api/get-users";
+import { getUsers } from "../../../api/get-users";
 import { useQuery } from "react-query";
-import { mapUsersList } from "../../utils/map-users-list";
+import { mapUsersList } from "../../../utils/map-users-list";
+import { EditOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const {Column} = Table;
-const Users: React.FC = () => {
-
+const Users: React.FC= () => {
+  const navigate = useNavigate()
+  const handleEditClick = (id: string) => {
+    navigate(`/users/edit/${id}`)
+  }
   const {
     data: users,
     isLoading,
@@ -21,12 +26,19 @@ const Users: React.FC = () => {
   if (isError) {
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
+  
   const mappedUsers = users ? mapUsersList(users) : [];
+
   return (
     <Table bordered dataSource={mappedUsers}>
       <Column title="E-mail" dataIndex="email"/>
       <Column title="Registration date" dataIndex="createdAt"/>
       <Column title="Last sign in" dataIndex="lastSignIn"/>
+      <Column title="Actions" render={((_, row) => {
+        return <EditOutlined className="text-xl text-gray-600 hover:cursor-pointer" onClick={() => {
+          handleEditClick(row.key)
+        }}/>
+      })}/>
 
     </Table>
   );
