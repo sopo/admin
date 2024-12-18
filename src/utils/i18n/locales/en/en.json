@@ -42,5 +42,13 @@
         "required": "This field is required"
       }
     }
+  },
+  "signIn": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "required": "This field is required",
+    "cta": "Sign In"
   }
 }
