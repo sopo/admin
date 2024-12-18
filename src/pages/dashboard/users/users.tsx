@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { getUsers } from "../../../api/get-users";
 import { useQuery } from "react-query";
 import { mapUsersList } from "../../../utils/map-users-list";
@@ -30,7 +30,7 @@ const Users: React.FC= () => {
   const mappedUsers = users ? mapUsersList(users) : [];
 
   return (
-    <Table bordered dataSource={mappedUsers}>
+    <Table title={() => <Button onClick={() => navigate("/users/add")}>Add User</Button>} bordered dataSource={mappedUsers}>
       <Column title="E-mail" dataIndex="email"/>
       <Column title="Registration date" dataIndex="createdAt"/>
       <Column title="Last sign in" dataIndex="lastSignIn"/>
