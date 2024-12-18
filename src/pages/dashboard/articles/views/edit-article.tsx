@@ -2,11 +2,11 @@ import { useForm } from "antd/es/form/Form";
 import { useAtom } from "jotai";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
-import { editUser } from "../../../../api/edit-user";
-import { getUser } from "../../../../api/get-user";
-import { RegisterProps } from "../../../../interfaces/interfaces";
 import { UserAtom } from "../../../../store/auth";
-import EditUserForm from "../../users/components/user-form";
+import ArticleForm from "../components/article-form";
+import { ArticleProps } from "../../../../interfaces/types";
+import { getArticle } from "../../../../api/get-article";
+import { editArticle } from "../../../../api/edit-article";
 
 
 const EditArticle: React.FC = () => {
@@ -15,32 +15,34 @@ const EditArticle: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const mutation = useMutation(
-    (values: RegisterProps) => {
+    (values: ArticleProps) => {
       if (id) {
-        return editUser(id, values);
+        return editArticle(id, values);
       }
       return Promise.reject("no ID found");
     },
     {
       onSuccess: () => {
-        navigate("/users");
+        navigate("/articles");
       },
     }
   );
   const { data, isLoading, isError, error } = useQuery(
-    ["user", id],
-    () => (id ? getUser(id) : Promise.reject("undefined Id")),
+    ["article", id],
+    () => (id ? getArticle(id) : Promise.reject("undefined Id")),
     {
       enabled: !!id,
-      onSuccess: (userData) => {
+      onSuccess: (articleData) => {
         form.setFieldsValue({
-          email: userData?.email,
-          password: "",
+          title_ka: articleData?.title_ka,
+          title_en: articleData?.title_en,
+          description_ka: articleData?.description_ka,
+          description_en: articleData?.description_en
         });
       },
     }
   );
-
+console.log(data)
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -51,7 +53,7 @@ const EditArticle: React.FC = () => {
     return <Navigate to="/sign-in" />;
   }
 
-  const handleSubmit = (values: RegisterProps) => {
+  const handleSubmit = (values: ArticleProps) => {
     mutation.mutate(values);
   };
 
@@ -59,8 +61,13 @@ const EditArticle: React.FC = () => {
     <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
       <h1 className="text-xl font-semibold text-gray-900">Edit Article</h1>
 
-      <EditUserForm
-        initialValues={{ email: data?.email || "", password: "" }}
+      <ArticleForm
+        initialValues={{
+            title_ka: data?.title_ka || "", 
+            title_en: data?.title_en || "",
+            description_ka: data?.description_ka || "",
+            description_en: data?.description_en || "",
+          }}
         onSubmit={handleSubmit}
       />
     </div>
