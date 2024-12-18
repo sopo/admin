@@ -4,10 +4,12 @@ import AuthorizationLayout from "../layouts/authorization/authorization";
 import GuestGuard from "./guards/guest-guard";
 import UserGuard from "./guards/user-guard";
 import DashboardLayout from "../layouts/dashboard/dashboard-layout";
-import Users from "../pages/dashboard/users/users";
-import Articles from "../pages/dashboard/articles";
-import EditUser from "../pages/dashboard/users/views/update-users/edit-user";
+import Users from "../pages/dashboard/users/views/users";
+import Articles from "../pages/dashboard/articles/views/articles";
+import EditUser from "../pages/dashboard/users/views/edit-user";
 import AddUser from "../pages/dashboard/users/views/add-user";
+import AddArticle from "../pages/dashboard/articles/views/add-article";
+import EditArticle from "../pages/dashboard/articles/views/edit-article";
 
 export const routes: RouteObject[] = [
   {
@@ -37,6 +39,14 @@ export const routes: RouteObject[] = [
       {
         path: "/articles",
         element: <Articles />,
+      },
+      {
+        path: "/articles/add",
+        element: <AddArticle />,
+      },
+      {
+        path: "/articles/edit/:id",
+        element: <EditArticle/>,
       },
     ],
   },

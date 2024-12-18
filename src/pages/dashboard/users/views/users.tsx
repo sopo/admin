@@ -1,9 +1,9 @@
 import { Button, Table } from "antd";
-import { getUsers } from "../../../api/get-users";
 import { useQuery } from "react-query";
-import { mapUsersList } from "../../../utils/map-users-list";
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { mapUsersList } from "../../../../utils/map-users-list";
+import { getUsers } from "../../../../api/get-users";
 
 const {Column} = Table;
 const Users: React.FC= () => {

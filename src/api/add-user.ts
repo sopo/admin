@@ -1,7 +1,4 @@
 import { supabase } from "../supabase"
-// export const AddUser = (payload: {email:string, password:string}) => {
-//     return supabase.auth.admin.createUser({...payload})
-// }
 
 export const AddUser = async (payload: { email: string, password: string }) => {
     try {
