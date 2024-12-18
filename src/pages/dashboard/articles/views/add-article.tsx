@@ -4,8 +4,9 @@ import { UserAtom } from "../../../../store/auth";
 
 import { useMutation } from "react-query";
 import { ArticleProps } from "../../../../interfaces/types";
-import { addArticle } from "../../../../api/add-article";
+
 import ArticleForm from "../components/article-form";
+import { addArticle } from "../../../../api/articles/add-article";
 
 
 const AddArticle:React.FC = () => {

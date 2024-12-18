@@ -1,5 +1,6 @@
-import { ArticleProps } from "../interfaces/types";
-import { supabase } from "../supabase";
+import { ArticleProps } from "../../interfaces/types";
+import { supabase } from "../../supabase";
+
 
 export const addArticle = async (payload: ArticleProps) => {
     const { data, error } = await supabase

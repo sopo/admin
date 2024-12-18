@@ -4,7 +4,7 @@ import { RegisterProps } from "../../../../interfaces/interfaces";
 import { UserAtom } from "../../../../store/auth";
 import EditUserForm from "../components/user-form";
 import { useMutation } from "react-query";
-import { AddUser as AddUserApi } from "../../../../api/add-user";
+import { AddUser as AddUserApi} from "../../../../api/users/add-user";
 
 
 const AddUser:React.FC = () => {

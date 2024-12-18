@@ -5,8 +5,8 @@ import { useMutation, useQuery } from "react-query";
 import { UserAtom } from "../../../../store/auth";
 import ArticleForm from "../components/article-form";
 import { ArticleProps } from "../../../../interfaces/types";
-import { getArticle } from "../../../../api/get-article";
-import { editArticle } from "../../../../api/edit-article";
+import { editArticle } from "../../../../api/articles/edit-article";
+import { getArticle } from "../../../../api/articles/get-article";
 
 
 const EditArticle: React.FC = () => {
