@@ -2,6 +2,7 @@ import React from "react";
 import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -10,18 +11,21 @@ const items1: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
   label: `nav ${key}`,
 }));
 
-const items2: MenuProps["items"] = [
-  {
-    key: "users",
-    label: <Link to="/users">Users</Link>,
-  },
-  {
-    key: "articles",
-    label: <Link to="/articles">Articles</Link>,
-  },
-];
+
 
 const DashboardLayout: React.FC = () => {
+  const {t} = useTranslation()
+  const items2: MenuProps["items"] = [
+    {
+      key: "users",
+      label: <Link to="/users">{t("dashboard.users.title")}</Link>,
+    },
+    {
+      key: "articles",
+      label: <Link to="/articles">{t("dashboard.articles.title")}</Link>,
+    },
+  ];
+ 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();

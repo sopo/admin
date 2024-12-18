@@ -4,9 +4,11 @@ import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { mapArticlesList } from "../../../../utils/map-articles-list";
 import { getArticles } from "../../../../api/articles/get-articles";
+import { useTranslation } from "react-i18next";
 
 const {Column} = Table;
 const Articles: React.FC= () => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const handleEditClick = (id: string) => {
     navigate(`/articles/edit/${id}`)
@@ -30,15 +32,15 @@ const Articles: React.FC= () => {
   const mappedArticles = articles ? mapArticlesList(articles) : [];
 
   return (
-    <Table title={() => <Button onClick={() => navigate("/articles/add")}>Add Article</Button>} bordered dataSource={mappedArticles}>
-      <Column title="Author En" dataIndex="author_en"/>
-      <Column title="Author Ka" dataIndex="author_ka"/>
-      <Column title="Date added" dataIndex="createdAt"/>
-      <Column title="Title En" dataIndex="title_en"/>
-      <Column title="Title ka" dataIndex="title_ka"/>
-      <Column title="Description en" dataIndex="description_en"/>
-      <Column title="Description ka" dataIndex="description_ka"/>
-      <Column title="Actions" render={((_, row) => {
+    <Table title={() => <Button onClick={() => navigate("/articles/add")}>{t("dashboard.articles.cta")}</Button>} bordered dataSource={mappedArticles}>
+      <Column title={t("dashboard.articles.columns.authorEn")} dataIndex="author_en"/>
+      <Column title={t("dashboard.articles.columns.authorKa")} dataIndex="author_ka"/>
+      <Column title={t("dashboard.articles.columns.dateAdded")} dataIndex="createdAt"/>
+      <Column title={t("dashboard.articles.columns.titleEn")} dataIndex="title_en"/>
+      <Column title={t("dashboard.articles.columns.titleKa")} dataIndex="title_ka"/>
+      <Column title={t("dashboard.articles.columns.descriptionEn")} dataIndex="description_en"/>
+      <Column title={t("dashboard.articles.columns.descriptionKa")} dataIndex="description_ka"/>
+      <Column title={t("dashboard.articles.columns.actions")} render={((_, row) => {
         return <EditOutlined className="text-xl text-gray-600 hover:cursor-pointer" onClick={() => {
           handleEditClick(row.key)
         }}/>
