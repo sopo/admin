@@ -5,7 +5,7 @@ import GuestGuard from "./guards/guest-guard";
 import UserGuard from "./guards/user-guard";
 import DashboardLayout from "../layouts/dashboard/dashboard-layout";
 import Users from "../pages/dashboard/users/users";
-import Articles from "../pages/dashboard/articles";
+import Articles from "../pages/dashboard/articles/articles";
 import EditUser from "../pages/dashboard/users/views/update-users/edit-user";
 import AddUser from "../pages/dashboard/users/views/add-user";
 
@@ -36,6 +36,14 @@ export const routes: RouteObject[] = [
       },
       {
         path: "/articles",
+        element: <Articles />,
+      },
+      {
+        path: "/articles/add",
+        element: <Articles />,
+      },
+      {
+        path: "/articles/edit/:id",
         element: <Articles />,
       },
     ],
