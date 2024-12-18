@@ -25,7 +25,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) =>
     >
       <Item
         label="Title En"
-        name="titleEn"
+        name="title_en"
         rules={[{ required: true, message: "Enter English title" }]}
       >
         <Input placeholder="Enter English title" />
@@ -33,7 +33,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) =>
 
       <Item
         label="Title Ka"
-        name="titleKa"
+        name="title_ka"
         rules={[{ required: true, message: "Enter Georgian title" }]}
       >
         <Input placeholder="Enter Georgian title" />
@@ -41,7 +41,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) =>
 
       <Item
         label="Description En"
-        name="descriptionEn"
+        name="description_en"
         rules={[{ required: true, message: "Enter English description" }]}
       >
         <TextArea placeholder="Enter English description" />
@@ -49,7 +49,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) =>
 
       <Item
         label="Description Ka"
-        name="descriptionKa"
+        name="description_ka"
         rules={[{ required: true, message: "This field is required" }]}
       >
         <TextArea placeholder="Enter Georgian description" />

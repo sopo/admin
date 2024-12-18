@@ -1,11 +1,11 @@
 import { useAtom } from "jotai";
 import {  Navigate, useNavigate,} from "react-router-dom";
-import { RegisterProps } from "../../../../interfaces/interfaces";
 import { UserAtom } from "../../../../store/auth";
 
 import { useMutation } from "react-query";
-import { AddUser as AddUserApi } from "../../../../api/add-user";
-import EditUserForm from "../../users/components/user-form";
+import { ArticleProps } from "../../../../interfaces/types";
+import { addArticle } from "../../../../api/add-article";
+import ArticleForm from "../components/article-form";
 
 
 const AddArticle:React.FC = () => {
@@ -14,17 +14,17 @@ const AddArticle:React.FC = () => {
   const navigate = useNavigate()
   
   const mutation = useMutation(
-    (values: RegisterProps) => {
-        return AddUserApi(values);
+    (values: ArticleProps) => {
+        return addArticle(values);
     },
     {
       onSuccess: () => {
-        navigate("/users");
+        navigate("/articles");
       },
     }
   );
 
-  const handleSubmit = (values: RegisterProps) => {
+  const handleSubmit = (values: ArticleProps) => {
     mutation.mutate(values);
   }
 
@@ -34,7 +34,7 @@ const AddArticle:React.FC = () => {
     return(
         <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
         <h1 className="text-xl font-semibold text-gray-900">Add Article</h1>
-        <EditUserForm 
+        <ArticleForm 
         onSubmit={handleSubmit}
       />
       </div>

@@ -30,7 +30,7 @@ const Articles: React.FC= () => {
   const mappedArticles = articles ? mapArticlesList(articles) : [];
 
   return (
-    <Table title={() => <Button onClick={() => navigate("/users/add")}>Add User</Button>} bordered dataSource={mappedArticles}>
+    <Table title={() => <Button onClick={() => navigate("/articles/add")}>Add Article</Button>} bordered dataSource={mappedArticles}>
       <Column title="Author En" dataIndex="author_en"/>
       <Column title="Author Ka" dataIndex="author_ka"/>
       <Column title="Date added" dataIndex="createdAt"/>
