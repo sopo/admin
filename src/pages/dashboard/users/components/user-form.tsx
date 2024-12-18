@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { RegisterProps } from "../../../../interfaces/interfaces";
 import { useForm } from "antd/es/form/Form";
+import { Trans, useTranslation } from "react-i18next";
 
 const { Item } = Form;
 
@@ -11,6 +12,7 @@ interface EditUserFormProps {
 
 const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit }) => {
   const [form] = useForm();
+  const {t} = useTranslation()
 
   return (
     <Form
@@ -23,24 +25,24 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit }) 
       className="w-full"
     >
       <Item
-        label="Email"
+        label={t("dashboard.users.form.email")} 
         name="email"
-        rules={[{ required: true, message: "Enter user Email" }]}
+        rules={[{ required: true, message:<Trans>dashboard.users.form.required</Trans> }]}
       >
-        <Input placeholder="Enter new email" />
+        <Input placeholder={t("dashboard.users.form.email")}  />
       </Item>
 
       <Item
-        label="Password"
+        label={t("dashboard.users.form.password")} 
         name="password"
-        rules={[{ required: true, message: "Enter password" }]}
+        rules={[{ required: true, message:<Trans>dashboard.users.form.required</Trans>  }]}
       >
-        <Input placeholder="Enter new password" />
+        <Input placeholder={t("dashboard.users.form.password")} />
       </Item>
 
       <Item label={null}>
         <Button type="primary" htmlType="submit" block>
-          Save
+        {t("dashboard.users.form.cta")} 
         </Button>
       </Item>
     </Form>

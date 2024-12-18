@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
 import { ArticleProps } from "../../../../interfaces/types";
+import { Trans, useTranslation } from "react-i18next";
 
 const { Item } = Form;
 
@@ -12,6 +13,7 @@ interface ArticleFormProps {
 
 const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) => {
   const [form] = useForm();
+  const {t} = useTranslation()
 
   return (
     <Form
@@ -24,42 +26,42 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) =>
       className="w-full"
     >
       <Item
-        label="Title En"
+        label={t("dashboard.articles.form.titleEn")}
         name="title_en"
-        rules={[{ required: true, message: "Enter English title" }]}
+        rules={[{ required: true, message: <Trans>dashboard.articles.form.required</Trans> }]}
       >
-        <Input placeholder="Enter English title" />
+        <Input placeholder={t("dashboard.articles.form.titleEn")} />
       </Item>
 
       <Item
-        label="Title Ka"
+        label={t("dashboard.articles.form.titleKa")}
         name="title_ka"
-        rules={[{ required: true, message: "Enter Georgian title" }]}
+        rules={[{ required: true, message: <Trans>dashboard.articles.form.required</Trans> }]}
       >
-        <Input placeholder="Enter Georgian title" />
+        <Input placeholder={t("dashboard.articles.form.titleKa")} />
       </Item>
-
+  
       <Item
-        label="Description En"
+        label={t("dashboard.articles.form.descriptionEn")}
         name="description_en"
-        rules={[{ required: true, message: "Enter English description" }]}
+        rules={[{ required: true, message:<Trans>dashboard.articles.form.required</Trans>}]}
       >
-        <TextArea placeholder="Enter English description" />
+        <TextArea placeholder={t("dashboard.articles.form.descriptionEn")} />
       </Item>
 
       <Item
-        label="Description Ka"
+        label={t("dashboard.articles.form.descriptionKa")}
         name="description_ka"
-        rules={[{ required: true, message: "This field is required" }]}
+        rules={[{ required: true, message:<Trans>dashboard.articles.form.required</Trans> }]}
       >
-        <TextArea placeholder="Enter Georgian description" />
+        <TextArea placeholder={t("dashboard.articles.form.descriptionKa")} />
       </Item>
 
      
 
       <Item label={null}>
         <Button type="primary" htmlType="submit" block>
-          Save
+        {t("dashboard.articles.form.cta")}
         </Button>
       </Item>
     </Form>

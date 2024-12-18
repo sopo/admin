@@ -7,11 +7,13 @@ import { UserAtom } from "../../../../store/auth";
 import EditUserForm from "../components/user-form";
 import { editUser } from "../../../../api/users/edit-user";
 import { getUser } from "../../../../api/users/get-user";
+import { useTranslation } from "react-i18next";
 
 const EditUser: React.FC = () => {
   const [user] = useAtom(UserAtom);
   const [form] = useForm();
   const { id } = useParams();
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const mutation = useMutation(
     (values: RegisterProps) => {
@@ -56,7 +58,7 @@ const EditUser: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-      <h1 className="text-xl font-semibold text-gray-900">Edit User</h1>
+      <h1 className="text-xl font-semibold text-gray-900">{t("dashboard.users.form.titleEdit")}</h1>
 
       <EditUserForm
         initialValues={{ email: data?.email || "", password: "" }}

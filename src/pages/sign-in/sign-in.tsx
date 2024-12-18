@@ -4,8 +4,10 @@ import { useMutation } from "react-query";
 import { login } from "../../api/authorization";
 import { useNavigate } from "react-router-dom";
 import { AuthProps } from "../../interfaces/interfaces";
+import { Trans, useTranslation } from "react-i18next";
 
 const SignIn: React.FC = () => {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const { mutate: handleLogin } = useMutation({
     mutationKey: ["login"],
@@ -29,7 +31,7 @@ const SignIn: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-      <h1 className="text-xl font-semibold text-gray-900">Log in</h1>
+      <h1 className="text-xl font-semibold text-gray-900">{t("signIn.title")}</h1>
       <Form
         name="basic"
         initialValues={{ remember: true }}
@@ -40,17 +42,17 @@ const SignIn: React.FC = () => {
         className="w-full"
       >
         <Form.Item<AuthProps>
-          label="Email"
+          label={t("signIn.email")}
           name="email"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: <Trans>signIn.required</Trans> }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item<AuthProps>
-          label="Password"
+          label={t("signIn.password")}
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: <Trans>signIn.required</Trans>}]}
         >
           <Input.Password />
         </Form.Item>
@@ -60,11 +62,11 @@ const SignIn: React.FC = () => {
           valuePropName="checked"
           label={null}
         >
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>{t("signIn.rememberMe")}</Checkbox>
         </Form.Item>
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" block>
-            Submit
+          {t("signIn.cta")}
           </Button>
         </Form.Item>
       </Form>

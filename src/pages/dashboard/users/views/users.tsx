@@ -4,10 +4,11 @@ import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { mapUsersList } from "../../../../utils/map-users-list";
 import { getUsers } from "../../../../api/users/get-users";
-
+import { useTranslation } from "react-i18next";
 
 const {Column} = Table;
 const Users: React.FC= () => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const handleEditClick = (id: string) => {
     navigate(`/users/edit/${id}`)
@@ -31,11 +32,11 @@ const Users: React.FC= () => {
   const mappedUsers = users ? mapUsersList(users) : [];
 
   return (
-    <Table title={() => <Button onClick={() => navigate("/users/add")}>Add User</Button>} bordered dataSource={mappedUsers}>
-      <Column title="E-mail" dataIndex="email"/>
-      <Column title="Registration date" dataIndex="createdAt"/>
-      <Column title="Last sign in" dataIndex="lastSignIn"/>
-      <Column title="Actions" render={((_, row) => {
+    <Table title={() => <Button onClick={() => navigate("/users/add")}> {t("dashboard.users.cta")}</Button>} bordered dataSource={mappedUsers}>
+      <Column title={t("dashboard.users.columns.email")} dataIndex="email"/>
+      <Column  title={t("dashboard.users.columns.registrationDate")} dataIndex="createdAt"/>
+      <Column  title={t("dashboard.users.columns.lastSignedIn")} dataIndex="lastSignIn"/>
+      <Column  title={t("dashboard.users.columns.actions")} render={((_, row) => {
         return <EditOutlined className="text-xl text-gray-600 hover:cursor-pointer" onClick={() => {
           handleEditClick(row.key)
         }}/>

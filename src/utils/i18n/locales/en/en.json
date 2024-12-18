@@ -1,0 +1,54 @@
+{
+  "dashboard": {
+    "users": {
+      "title": "Users",
+      "cta": "Add User",
+      "columns": {
+        "email": "Email",
+        "registrationDate": "Registration Date",
+        "lastSignedIn": "Last Signed In",
+        "actions": "Actions"
+      },
+      "form": {
+        "titleAdd": "Add User",
+        "titleEdit": "Edit User Details",
+        "email": "Enter Email",
+        "password": "Enter Password",
+        "cta": "Save",
+        "required": "This field is required"
+      }
+    },
+    "articles": {
+      "title": "Articles",
+      "cta": "Add Article",
+      "columns": {
+        "authorEn": "Author En",
+        "authorKa": "Author Ka",
+        "dateAdded": "Date Added",
+        "titleEn": "Title En",
+        "titleKa": "Title Ka",
+        "descriptionEn": "Description En",
+        "descriptionKa": "Description Ka",
+        "actions": "Actions"
+      },
+      "form": {
+        "titleAdd": "Add Article",
+        "titleEdit": "Edit Article",
+        "titleEn": "English Title",
+        "titleKa": "Georgian Title",
+        "descriptionEn": "English Description",
+        "descriptionKa": "Georgian Description",
+        "cta": "Save",
+        "required": "This field is required"
+      }
+    }
+  },
+  "signIn": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "required": "This field is required",
+    "cta": "Sign In"
+  }
+}
