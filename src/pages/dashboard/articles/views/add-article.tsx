@@ -1,13 +1,11 @@
+import { addArticle } from "@/api/articles/add-article";
+import { ArticleProps } from "@/interfaces/types";
+import { UserAtom } from "@/store/auth";
 import { useAtom } from "jotai";
-import {  Navigate, useNavigate,} from "react-router-dom";
-import { UserAtom } from "../../../../store/auth";
-import { useMutation } from "react-query";
-import { ArticleProps } from "../../../../interfaces/types";
-import ArticleForm from "../components/article-form";
-import { addArticle } from "../../../../api/articles/add-article";
 import { useTranslation } from "react-i18next";
-
-
+import { useMutation } from "react-query";
+import { useNavigate, Navigate } from "react-router-dom";
+import ArticleForm from "../components/article-form";
 
 const AddArticle:React.FC = () => {
   const {t} = useTranslation();

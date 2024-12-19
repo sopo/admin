@@ -1,10 +1,11 @@
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useMutation } from "react-query";
-import { login } from "../../api/authorization";
 import { useNavigate } from "react-router-dom";
-import { AuthProps } from "../../interfaces/interfaces";
 import { Trans, useTranslation } from "react-i18next";
+import { AuthProps } from "@/interfaces/interfaces";
+import { login } from "@/api/authorization";
+
 
 const SignIn: React.FC = () => {
   const {t} = useTranslation()

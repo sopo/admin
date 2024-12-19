@@ -2,9 +2,10 @@ import { Button, Table } from "antd";
 import { useQuery } from "react-query";
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { mapArticlesList } from "../../../../utils/map-articles-list";
-import { getArticles } from "../../../../api/articles/get-articles";
+import { getArticles } from "@/api/articles/get-articles";
+import { mapArticlesList } from "@/utils/map-articles-list";
 import { useTranslation } from "react-i18next";
+
 
 const {Column} = Table;
 const Articles: React.FC= () => {

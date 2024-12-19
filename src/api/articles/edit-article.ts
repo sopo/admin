@@ -1,6 +1,5 @@
-import { ArticleProps } from "../../interfaces/types";
-import { supabase } from "../../supabase";
-
+import { ArticleProps } from "@/interfaces/types";
+import { supabase } from "@/supabase";
 
 export const editArticle = async (id: number | string, payload: ArticleProps) => {
     const { data, error } = await supabase
