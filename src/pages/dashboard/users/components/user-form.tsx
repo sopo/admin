@@ -1,5 +1,5 @@
+import { RegisterProps } from "@/interfaces/interfaces";
 import { Button, Form, Input } from "antd";
-import { RegisterProps } from "../../../../interfaces/interfaces";
 import { useForm } from "antd/es/form/Form";
 import { Trans, useTranslation } from "react-i18next";
 
