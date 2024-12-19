@@ -2,12 +2,12 @@ import { useForm } from "antd/es/form/Form";
 import { useAtom } from "jotai";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
-import { RegisterProps } from "../../../../interfaces/interfaces";
-import { UserAtom } from "../../../../store/auth";
-import EditUserForm from "../components/user-form";
-import { editUser } from "../../../../api/users/edit-user";
-import { getUser } from "../../../../api/users/get-user";
 import { useTranslation } from "react-i18next";
+import { RegisterProps } from "@/interfaces/interfaces";
+import { editUser } from "@/api/users/edit-user";
+import { getUser } from "@/api/users/get-user";
+import { UserAtom } from "@/store/auth";
+import EditUserForm from "../components/user-form";
 
 const EditUser: React.FC = () => {
   const [user] = useAtom(UserAtom);

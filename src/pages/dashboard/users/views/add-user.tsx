@@ -1,11 +1,11 @@
 import { useAtom } from "jotai";
 import {  Navigate, useNavigate,} from "react-router-dom";
-import { RegisterProps } from "../../../../interfaces/interfaces";
-import { UserAtom } from "../../../../store/auth";
-import EditUserForm from "../components/user-form";
 import { useMutation } from "react-query";
-import { AddUser as AddUserApi} from "../../../../api/users/add-user";
 import { useTranslation } from "react-i18next";
+import { UserAtom } from "@/store/auth";
+import { RegisterProps } from "@/interfaces/interfaces";
+import { AddUser as AddUserApi } from "@/api/users/add-user";
+import EditUserForm from "../components/user-form";
 
 
 const AddUser:React.FC = () => {

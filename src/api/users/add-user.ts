@@ -1,4 +1,4 @@
-import { supabase } from "../../supabase";
+import { supabase } from "@/supabase";
 
 export const AddUser = async (payload: { email: string, password: string }) => {
     try {

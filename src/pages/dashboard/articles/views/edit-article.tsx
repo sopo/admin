@@ -2,11 +2,11 @@ import { useForm } from "antd/es/form/Form";
 import { useAtom } from "jotai";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
-import { UserAtom } from "../../../../store/auth";
+import { editArticle } from "@/api/articles/edit-article";
+import { getArticle } from "@/api/articles/get-article";
+import { ArticleProps } from "@/interfaces/types";
+import { UserAtom } from "@/store/auth";
 import ArticleForm from "../components/article-form";
-import { ArticleProps } from "../../../../interfaces/types";
-import { editArticle } from "../../../../api/articles/edit-article";
-import { getArticle } from "../../../../api/articles/get-article";
 
 
 const EditArticle: React.FC = () => {

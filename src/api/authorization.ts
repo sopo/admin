@@ -1,5 +1,5 @@
-import { AuthProps } from "../interfaces/interfaces";
-import { supabase } from "../supabase";
+import { AuthProps } from "@/interfaces/interfaces";
+import { supabase } from "@/supabase";
 
 export const login = async ({ email, password }: AuthProps) => {
   const { data, error } = await supabase.auth.signInWithPassword({

@@ -1,7 +1,7 @@
+import { ArticleProps } from "@/interfaces/types";
 import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
-import { ArticleProps } from "../../../../interfaces/types";
 import { Trans, useTranslation } from "react-i18next";
 
 const { Item } = Form;
