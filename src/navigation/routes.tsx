@@ -1,15 +1,13 @@
-import AddUser from "@/pages/dashboard/users/views/add-user";
 import AuthorizationLayout from "@/layouts/authorization/authorization";
 import DashboardLayout from "@/layouts/dashboard/dashboard-layout";
 import AddArticle from "@/pages/dashboard/articles/views/add-article";
 import Articles from "@/pages/dashboard/articles/views/articles";
 import EditArticle from "@/pages/dashboard/articles/views/edit-article";
-import EditUser from "@/pages/dashboard/users/views/edit-user";
-import Users from "@/pages/dashboard/users/views/users";
 import SignIn from "@/pages/sign-in/sign-in";
-import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 import GuestGuard from "./guards/guest-guard";
 import UserGuard from "./guards/user-guard";
+import { DASHBOARD_ROUTES } from "./routes/dashboard-layout";
 
 
 export const routes: RouteObject[] = [
@@ -21,22 +19,7 @@ export const routes: RouteObject[] = [
       </GuestGuard>
     ),
     children: [
-      {
-        path: "/",
-        element: <Navigate to="/users" />,
-      },
-      {
-        path: "users",
-        element: <Users />,
-      },
-      {
-        path: "users/edit/:id",
-        element: <EditUser />,
-      },
-      {
-        path: "users/add",
-        element: <AddUser />,
-      },
+      ...DASHBOARD_ROUTES,
       {
         path: "/articles",
         element: <Articles />,

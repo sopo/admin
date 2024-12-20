@@ -7,3 +7,7 @@ export interface RegisterProps {
   email: string;
   password: string;
 }
+export interface Route {
+  path: string;
+  element: React.ReactNode;
+}
