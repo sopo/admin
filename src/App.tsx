@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { router } from "./navigation/routes";
+import { router } from "./navigation/routes/routes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { UserAtom } from "./store/auth";
 import { useSetAtom } from "jotai";

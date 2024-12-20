@@ -5,9 +5,9 @@ import Articles from "@/pages/dashboard/articles/views/articles";
 import EditArticle from "@/pages/dashboard/articles/views/edit-article";
 import SignIn from "@/pages/sign-in/sign-in";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import GuestGuard from "./guards/guest-guard";
-import UserGuard from "./guards/user-guard";
-import { DASHBOARD_ROUTES } from "./routes/dashboard-layout";
+import GuestGuard from "../guards/guest-guard";
+import UserGuard from "../guards/user-guard";
+import { DASHBOARD_ROUTES } from "./dashboard-layout";
 
 
 export const routes: RouteObject[] = [
@@ -19,19 +19,7 @@ export const routes: RouteObject[] = [
       </GuestGuard>
     ),
     children: [
-      ...DASHBOARD_ROUTES,
-      {
-        path: "/articles",
-        element: <Articles />,
-      },
-      {
-        path: "/articles/add",
-        element: <AddArticle />,
-      },
-      {
-        path: "/articles/edit/:id",
-        element: <EditArticle/>,
-      },
+      ...DASHBOARD_ROUTES
     ],
   },
   {
