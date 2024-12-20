@@ -1,11 +1,16 @@
 import { Suspense } from "react";
 import { Navigate } from "react-router-dom";
 import { Route } from "@/interfaces/interfaces";
-import { USERS_PATHS } from "./index.enum";
 import { AddUser } from "./lazy-imports/add-user.loader";
 import { EditUser } from "./lazy-imports/edit-user.loader";
 import { Users } from "./lazy-imports/users.loader";
 import { Fallback } from "../../fallback-loader";
+
+export enum USERS_PATHS {
+  USERS_LIST = "users",
+  USERS_EDIT = "users/edit",
+  USERS_ADD = "users/add"
+}
 
 export const USERS_ROUTES: Route[] = [
   {

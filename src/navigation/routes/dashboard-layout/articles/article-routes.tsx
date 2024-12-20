@@ -1,9 +1,13 @@
 import { Route } from "@/interfaces/interfaces";
-import { ARTICLES_PATHS } from "./index.enum";
 import { AddArticle } from "./lazy-imports/add-article.loader";
 import { Articles } from "./lazy-imports/articles.loader";
 import { EditArticle } from "./lazy-imports/edit-article.loader";
 
+export enum ARTICLES_PATHS {
+  ARTICLES_LIST = "articles",
+  ARTICLES_EDIT = "articles/edit",
+  ARTICLES_ADD = "articles/add"
+}
 
 export const ARTICLES_ROUTES: Route [] = [{
     path: ARTICLES_PATHS.ARTICLES_LIST,
