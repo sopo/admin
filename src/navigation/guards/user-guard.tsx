@@ -5,6 +5,7 @@ import { UserAtom } from "@/store/auth";
 
 const LoggedInGuard: React.FC<PropsWithChildren> = ({ children }) => {
   const user = useAtomValue(UserAtom);
+
   if (user) {
     return <Navigate to={`/`} />;
   }

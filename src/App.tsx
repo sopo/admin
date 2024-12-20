@@ -9,6 +9,7 @@ const queryClient = new QueryClient();
 function App() {
   const [loading, setLoading] = useState(true);
   const setUser = useSetAtom(UserAtom);
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session);
