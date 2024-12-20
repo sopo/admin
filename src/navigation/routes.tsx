@@ -1,4 +1,4 @@
-import { AddUser } from "@/api/users/add-user";
+import AddUser from "@/pages/dashboard/users/views/add-user";
 import AuthorizationLayout from "@/layouts/authorization/authorization";
 import DashboardLayout from "@/layouts/dashboard/dashboard-layout";
 import AddArticle from "@/pages/dashboard/articles/views/add-article";
