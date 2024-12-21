@@ -1,6 +1,5 @@
 import { ArticleProps } from "@/interfaces/types";
-import { Button, Form, Input } from "antd";
-import { useForm } from "antd/es/form/Form";
+import { Button, Form, FormInstance, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -9,10 +8,10 @@ const { Item } = Form;
 interface ArticleFormProps {
   initialValues?: ArticleProps;
   onSubmit: (values: ArticleProps) => void;
+  form:  FormInstance;
 }
 
-const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit }) => {
-  const [form] = useForm();
+const ArticleForm: React.FC<ArticleFormProps> = ({ initialValues, onSubmit, form }) => {
   const {t} = useTranslation()
 
   return (
