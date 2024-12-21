@@ -1,45 +1,40 @@
-import { addArticle } from "@/api/articles/add-article";
 import { ArticleProps } from "@/interfaces/types";
 import { UserAtom } from "@/store/auth";
 import { useAtom } from "jotai";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "react-query";
-import { useNavigate, Navigate } from "react-router-dom";
+import {  Navigate } from "react-router-dom";
 import ArticleForm from "../components/article-form";
 import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
-import { ARTICLES_PATHS } from "../article-routes";
+import useAddArticle from "@/hooks/use-add-article";
 
-const AddArticle:React.FC = () => {
-  const {t} = useTranslation();
+const AddArticle: React.FC = () => {
+  const { t } = useTranslation();
   const [user] = useAtom(UserAtom);
 
-  const navigate = useNavigate()
-  
-  const mutation = useMutation(
-    (values: ArticleProps) => {
-        return addArticle(values);
-    },
-    {
-      onSuccess: () => {
-        navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`);
-      },
-    }
-  );
+  const { mutate, isLoading, isError, error } = useAddArticle();
 
   const handleSubmit = (values: ArticleProps) => {
-    mutation.mutate(values);
-  }
+    mutate(values);
+  };
 
-  if(!user){
+  if (!user) {
     return <Navigate to={AUTH_PATHS.SIGN_IN} />;
   }
-    return(
-        <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-        <h1 className="text-xl font-semibold text-gray-900">{t("dashboard.articles.form.titleAdd")}</h1>
-        <ArticleForm 
-        onSubmit={handleSubmit}
-      />
-      </div>
-    )
-}
-export default AddArticle
+  return (
+    <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
+      <h1 className="text-xl font-semibold text-gray-900">
+        {t("dashboard.articles.form.titleAdd")}
+      </h1>
+      {isLoading && <div>Loading...</div>}
+
+      {isError && (
+        <div className="text-red-500">
+          Error: {error instanceof Error ? error.message : "Unknown error"}
+        </div>
+      )}
+
+      {!isLoading && !isError && <ArticleForm onSubmit={handleSubmit} />}
+    </div>
+  );
+};
+export default AddArticle;
