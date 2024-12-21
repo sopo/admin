@@ -1,45 +1,39 @@
 import { useAtom } from "jotai";
-import {  Navigate, useNavigate,} from "react-router-dom";
-import { useMutation } from "react-query";
+import { Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserAtom } from "@/store/auth";
 import { RegisterProps } from "@/interfaces/interfaces";
-import { AddUser as AddUserApi } from "@/api/users/add-user";
 import EditUserForm from "../components/user-form";
-import { USERS_PATHS } from "../users-routes";
 import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
+import useAddUser from "@/hooks/use-add-user";
 
-
-const AddUser:React.FC = () => {
+const AddUser: React.FC = () => {
   const [user] = useAtom(UserAtom);
-  const {t} =  useTranslation()
-  const navigate = useNavigate()
-  
-  const mutation = useMutation(
-    (values: RegisterProps) => {
-        return AddUserApi(values);
-    },
-    {
-      onSuccess: () => {
-        navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`);
-      },
-    }
-  );
+  const { t } = useTranslation();
+
+  const { mutate, isLoading, isError, error } = useAddUser();
 
   const handleSubmit = (values: RegisterProps) => {
-    mutation.mutate(values);
-  }
+    mutate(values);
+  };
 
-  if(!user){
+  if (!user) {
     return <Navigate to={AUTH_PATHS.SIGN_IN} />;
   }
-    return(
-        <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-        <h1 className="text-xl font-semibold text-gray-900">{t("dashboard.users.form.titleAdd")} </h1>
-        <EditUserForm 
-        onSubmit={handleSubmit}
-      />
-      </div>
-    )
-}
-export default AddUser
+  return (
+    <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
+      <h1 className="text-xl font-semibold text-gray-900">
+        {t("dashboard.users.form.titleAdd")}{" "}
+      </h1>
+      {isLoading && <div>Submitting...</div>}
+
+      {isError && (
+        <div className="text-red-500">
+          Error: {error instanceof Error ? error.message : "Unknown error"}
+        </div>
+      )}
+      {!isLoading && !isError && <EditUserForm onSubmit={handleSubmit} />}
+    </div>
+  );
+};
+export default AddUser;
