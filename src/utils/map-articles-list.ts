@@ -11,7 +11,7 @@ export const mapArticlesList = (articles: ArticlesListProps) => {
             title_ka: article?.title_ka,
             description_en: article?.description_en,
             description_ka: article?.description_ka,
-            key: article?.id ?? Math.random().toString(36).substr(2, 9),
+            key: article?.id ?? Math.random().toString(36).slice(2, 11),
         }))
     )
 }
