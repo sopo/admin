@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { router } from "./navigation/routes";
+import { router } from "./navigation/routes/routes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { UserAtom } from "./store/auth";
 import { useSetAtom } from "jotai";
@@ -9,6 +9,7 @@ const queryClient = new QueryClient();
 function App() {
   const [loading, setLoading] = useState(true);
   const setUser = useSetAtom(UserAtom);
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session);

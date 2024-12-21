@@ -7,6 +7,8 @@ import { getArticle } from "@/api/articles/get-article";
 import { ArticleProps } from "@/interfaces/types";
 import { UserAtom } from "@/store/auth";
 import ArticleForm from "../components/article-form";
+import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
+import { ARTICLES_PATHS } from "../article-routes";
 
 
 const EditArticle: React.FC = () => {
@@ -23,7 +25,7 @@ const EditArticle: React.FC = () => {
     },
     {
       onSuccess: () => {
-        navigate("/articles");
+        navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`);
       },
     }
   );
@@ -50,7 +52,7 @@ console.log(data)
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
   if (!user) {
-    return <Navigate to="/sign-in" />;
+    return <Navigate to={AUTH_PATHS.SIGN_IN} />;
   }
 
   const handleSubmit = (values: ArticleProps) => {

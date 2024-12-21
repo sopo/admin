@@ -6,6 +6,8 @@ import { UserAtom } from "@/store/auth";
 import { RegisterProps } from "@/interfaces/interfaces";
 import { AddUser as AddUserApi } from "@/api/users/add-user";
 import EditUserForm from "../components/user-form";
+import { USERS_PATHS } from "../users-routes";
+import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
 
 
 const AddUser:React.FC = () => {
@@ -19,7 +21,7 @@ const AddUser:React.FC = () => {
     },
     {
       onSuccess: () => {
-        navigate("/users");
+        navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`);
       },
     }
   );
@@ -29,7 +31,7 @@ const AddUser:React.FC = () => {
   }
 
   if(!user){
-    return <Navigate to="/sign-in" />;
+    return <Navigate to={AUTH_PATHS.SIGN_IN} />;
   }
     return(
         <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">

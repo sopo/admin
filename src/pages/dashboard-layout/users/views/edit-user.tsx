@@ -8,6 +8,7 @@ import { editUser } from "@/api/users/edit-user";
 import { getUser } from "@/api/users/get-user";
 import { UserAtom } from "@/store/auth";
 import EditUserForm from "../components/user-form";
+import { USERS_PATHS } from "../users-routes";
 
 const EditUser: React.FC = () => {
   const [user] = useAtom(UserAtom);
@@ -24,7 +25,7 @@ const EditUser: React.FC = () => {
     },
     {
       onSuccess: () => {
-        navigate("/users");
+        navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`);
       },
     }
   );
@@ -49,7 +50,7 @@ const EditUser: React.FC = () => {
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
   if (!user) {
-    return <Navigate to="/sign-in" />;
+    return <Navigate to={USERS_PATHS.USERS_LIST} />;
   }
 
   const handleSubmit = (values: RegisterProps) => {

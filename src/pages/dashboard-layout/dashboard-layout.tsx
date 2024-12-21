@@ -3,6 +3,8 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { USERS_PATHS } from "./users/users-routes";
+import { ARTICLES_PATHS } from "./articles/article-routes";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -18,11 +20,11 @@ const DashboardLayout: React.FC = () => {
   const items2: MenuProps["items"] = [
     {
       key: "users",
-      label: <Link to="/users">{t("dashboard.users.title")}</Link>,
+      label: <Link to={`${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`}>{t("dashboard.users.title")}</Link>,
     },
     {
       key: "articles",
-      label: <Link to="/articles">{t("dashboard.articles.title")}</Link>,
+      label: <Link to={`${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`}>{t("dashboard.articles.title")}</Link>,
     },
   ];
  

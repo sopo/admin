@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getArticles } from "@/api/articles/get-articles";
 import { mapArticlesList } from "@/utils/map-articles-list";
 import { useTranslation } from "react-i18next";
+import { ARTICLES_PATHS } from "../article-routes";
 
 
 const {Column} = Table;
@@ -12,7 +13,7 @@ const Articles: React.FC= () => {
   const {t} = useTranslation()
   const navigate = useNavigate()
   const handleEditClick = (id: string) => {
-    navigate(`/articles/edit/${id}`)
+    navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_EDIT}/${id}`)
   }
   const {
     data: articles,
@@ -33,7 +34,7 @@ const Articles: React.FC= () => {
   const mappedArticles = articles ? mapArticlesList(articles) : [];
 
   return (
-    <Table title={() => <Button onClick={() => navigate("/articles/add")}>{t("dashboard.articles.cta")}</Button>} bordered dataSource={mappedArticles}>
+    <Table title={() => <Button onClick={() => navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_ADD}`) }>{t("dashboard.articles.cta")}</Button>} bordered dataSource={mappedArticles}>
       <Column title={t("dashboard.articles.columns.authorEn")} dataIndex="author_en"/>
       <Column title={t("dashboard.articles.columns.authorKa")} dataIndex="author_ka"/>
       <Column title={t("dashboard.articles.columns.dateAdded")} dataIndex="createdAt"/>

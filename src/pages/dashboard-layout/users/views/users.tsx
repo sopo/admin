@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getUsers } from "@/api/users/get-users";
 import { mapUsersList } from "@/utils/map-users-list";
+import { USERS_PATHS } from "../users-routes";
 
 const {Column} = Table;
 const Users: React.FC= () => {
   const {t} = useTranslation()
   const navigate = useNavigate()
   const handleEditClick = (id: string) => {
-    navigate(`/users/edit/${id}`)
+    navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_EDIT}/${id}`)
   }
   const {
     data: users,
@@ -32,7 +33,7 @@ const Users: React.FC= () => {
   const mappedUsers = users ? mapUsersList(users) : [];
 
   return (
-    <Table title={() => <Button onClick={() => navigate("/users/add")}> {t("dashboard.users.cta")}</Button>} bordered dataSource={mappedUsers}>
+    <Table title={() => <Button onClick={() => navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_ADD}`)}> {t("dashboard.users.cta")}</Button>} bordered dataSource={mappedUsers}>
       <Column title={t("dashboard.users.columns.email")} dataIndex="email"/>
       <Column  title={t("dashboard.users.columns.registrationDate")} dataIndex="createdAt"/>
       <Column  title={t("dashboard.users.columns.lastSignedIn")} dataIndex="lastSignIn"/>
