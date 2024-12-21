@@ -29,7 +29,6 @@ const Articles: React.FC = () => {
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
 
-  const mappedArticles = articles ? mapArticlesList(articles) : [];
 
   return (
     <Table
@@ -45,7 +44,7 @@ const Articles: React.FC = () => {
         </Button>
       )}
       bordered
-      dataSource={mappedArticles}
+      dataSource={articles}
       rowKey="key"
     >
       <Column
