@@ -1,6 +1,5 @@
 import { RegisterProps } from "@/interfaces/interfaces";
-import { Button, Form, Input } from "antd";
-import { useForm } from "antd/es/form/Form";
+import { Button, Form, FormInstance, Input } from "antd";
 import { Trans, useTranslation } from "react-i18next";
 
 const { Item } = Form;
@@ -8,10 +7,10 @@ const { Item } = Form;
 interface EditUserFormProps {
   initialValues?: RegisterProps;
   onSubmit: (values: RegisterProps) => void;
+  form: FormInstance
 }
 
-const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit }) => {
-  const [form] = useForm();
+const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit, form }) => {
   const {t} = useTranslation()
 
   return (
