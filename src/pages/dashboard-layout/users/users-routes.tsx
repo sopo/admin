@@ -18,7 +18,7 @@ export const USERS_ROUTES = [
     path: "/",
     element: (
       <Suspense fallback={Loader}>
-        <Navigate to={USERS_PATHS.USERS} />
+        <Navigate to={`${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`} />
       </Suspense>
     ),
   },

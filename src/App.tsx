@@ -7,19 +7,14 @@ import { supabase } from "./supabase";
 import useGetUserSession from "./hooks/use-get-user-session";
 
 function App() {
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const setUser = useSetAtom(UserAtom);
 
-  // useEffect(() => {
-  //   supabase.auth.getSession().then(({ data: { session } }) => {
-  //     setUser(session);
-  //     setLoading(false);
-  //   });
   useGetUserSession((session) => {
     if (session) {
       setUser(session);
-      setLoading(false);
     }
+    setLoading(false);
   });
 
   useEffect(() => {
@@ -32,9 +27,9 @@ function App() {
     return () => subscription.unsubscribe();
   }, [setUser]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return <RouterProvider router={router} />;
 }
 
