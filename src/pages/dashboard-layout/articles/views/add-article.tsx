@@ -38,7 +38,9 @@ const AddArticle: React.FC = () => {
         </div>
       )}
 
-      {!isLoading && !isError && <ArticleForm form={form} onSubmit={handleSubmit} />}
+      {!isLoading && !isError && (
+        <ArticleForm form={form} onSubmit={handleSubmit} />
+      )}
     </div>
   );
 };

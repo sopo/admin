@@ -37,7 +37,9 @@ const AddUser: React.FC = () => {
           Error: {error instanceof Error ? error.message : "Unknown error"}
         </div>
       )}
-      {!isLoading && !isError && <EditUserForm form={form} onSubmit={handleSubmit} />}
+      {!isLoading && !isError && (
+        <EditUserForm form={form} onSubmit={handleSubmit} />
+      )}
     </div>
   );
 };
