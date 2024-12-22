@@ -12,7 +12,7 @@ const Articles: React.FC = () => {
   const navigate = useNavigate();
   const handleEditClick = (id: string) => {
     navigate(
-      `/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_EDIT}/${id}`
+      `/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_EDIT}/${id}`,
     );
   };
 
@@ -29,14 +29,13 @@ const Articles: React.FC = () => {
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
 
-
   return (
     <Table
       title={() => (
         <Button
           onClick={() =>
             navigate(
-              `/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_ADD}`
+              `/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_ADD}`,
             )
           }
         >

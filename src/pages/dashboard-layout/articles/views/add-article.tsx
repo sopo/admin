@@ -2,16 +2,21 @@ import { ArticleProps } from "@/interfaces/types";
 import { UserAtom } from "@/store/auth";
 import { useAtom } from "jotai";
 import { useTranslation } from "react-i18next";
-import {  Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import ArticleForm from "../components/article-form";
 import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
 import useAddArticle from "@/hooks/use-add-article";
+import { ARTICLES_PATHS } from "../article-routes";
+import { useForm } from "antd/es/form/Form";
 
 const AddArticle: React.FC = () => {
   const { t } = useTranslation();
   const [user] = useAtom(UserAtom);
-
-  const { mutate, isLoading, isError, error } = useAddArticle();
+  const [form] = useForm();
+  const navigate = useNavigate();
+  const { mutate, isLoading, isError, error } = useAddArticle(() => {
+    navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`);
+  });
 
   const handleSubmit = (values: ArticleProps) => {
     mutate(values);
@@ -33,7 +38,7 @@ const AddArticle: React.FC = () => {
         </div>
       )}
 
-      {!isLoading && !isError && <ArticleForm onSubmit={handleSubmit} />}
+      {!isLoading && !isError && <ArticleForm form={form} onSubmit={handleSubmit} />}
     </div>
   );
 };

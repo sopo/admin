@@ -1,17 +1,17 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import enLang from './locales/en/en.json'
-import kaLang from './locales/ka/ka.json'
+import enLang from "./locales/en/en.json";
+import kaLang from "./locales/ka/ka.json";
 // the translations
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
   en: {
-    translation: enLang
+    translation: enLang,
   },
   ka: {
-    translation: kaLang
-  }
+    translation: kaLang,
+  },
 };
 
 i18n
@@ -23,8 +23,8 @@ i18n
     // if you're using a language detector, do not define the lng option
 
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
 
-  export default i18n;
+export default i18n;

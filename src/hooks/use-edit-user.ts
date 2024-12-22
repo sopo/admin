@@ -1,27 +1,18 @@
 import { useMutation } from "react-query";
-import { editUser } from "@/api/users/edit-user"; 
-import { useNavigate } from "react-router-dom";
-import { RegisterProps } from "@/interfaces/interfaces"; 
-import { USERS_PATHS } from "@/pages/dashboard-layout/users/users-routes";
+import { editUser } from "@/api/users/edit-user";
+import { RegisterProps } from "@/interfaces/interfaces";
 
-const useEditUser = (id: string) => {
-  const navigate = useNavigate();
-
+const useEditUser = (id: string, onSuccess: () => void) => {
   const mutation = useMutation(
     (values: RegisterProps) => {
       if (id) {
-        return editUser(id, values); 
+        return editUser(id, values);
       }
-      return Promise.reject("no ID found"); 
+      return Promise.reject("no ID found");
     },
     {
-      onSuccess: () => {
-        navigate(`/users/${USERS_PATHS.USERS_LIST}`);
-      },
-      onError: (error) => {
-        console.error(error);
-      },
-    }
+      onSuccess,
+    },
   );
 
   return {

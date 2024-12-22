@@ -1,17 +1,22 @@
 import { useAtom } from "jotai";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserAtom } from "@/store/auth";
 import { RegisterProps } from "@/interfaces/interfaces";
 import EditUserForm from "../components/user-form";
 import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
 import useAddUser from "@/hooks/use-add-user";
+import { USERS_PATHS } from "../users-routes";
+import { useForm } from "antd/es/form/Form";
 
 const AddUser: React.FC = () => {
   const [user] = useAtom(UserAtom);
   const { t } = useTranslation();
-
-  const { mutate, isLoading, isError, error } = useAddUser();
+  const navigate = useNavigate();
+  const [form] = useForm();
+  const { mutate, isLoading, isError, error } = useAddUser(() => {
+    navigate(`/${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`);
+  });
 
   const handleSubmit = (values: RegisterProps) => {
     mutate(values);
@@ -32,7 +37,7 @@ const AddUser: React.FC = () => {
           Error: {error instanceof Error ? error.message : "Unknown error"}
         </div>
       )}
-      {!isLoading && !isError && <EditUserForm onSubmit={handleSubmit} />}
+      {!isLoading && !isError && <EditUserForm form={form} onSubmit={handleSubmit} />}
     </div>
   );
 };

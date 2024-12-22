@@ -1,6 +1,6 @@
 import { useForm } from "antd/es/form/Form";
 import { useAtom } from "jotai";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { RegisterProps } from "@/interfaces/interfaces";
 import { UserAtom } from "@/store/auth";
@@ -10,13 +10,20 @@ import useGetUser from "@/hooks/use-get-user";
 import useEditUser from "@/hooks/use-edit-user";
 
 const EditUser: React.FC = () => {
+  const navigate = useNavigate();
   const [user] = useAtom(UserAtom);
   const [form] = useForm();
   const { id } = useParams();
-  const {t} = useTranslation()
-  
-  const { mutate, isLoading: isEditLoading, isError: isEditError, error: editError } = useEditUser(id || "");
-  
+  const { t } = useTranslation();
+
+  const {
+    mutate,
+    isLoading: isEditLoading,
+    isError: isEditError,
+    error: editError,
+  } = useEditUser(id || "", () => {
+    navigate(`/users/${USERS_PATHS.USERS_LIST}`);
+  });
 
   const { data, isLoading, isError, error } = useGetUser({
     id: id || "",
@@ -33,7 +40,11 @@ const EditUser: React.FC = () => {
   }
 
   if (isEditError) {
-    return <div>Error: {editError instanceof Error ? editError.message : "Error"}</div>;
+    return (
+      <div>
+        Error: {editError instanceof Error ? editError.message : "Error"}
+      </div>
+    );
   }
   if (!user) {
     return <Navigate to={USERS_PATHS.USERS_LIST} />;
@@ -45,10 +56,12 @@ const EditUser: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-      <h1 className="text-xl font-semibold text-gray-900">{t("dashboard.users.form.titleEdit")}</h1>
+      <h1 className="text-xl font-semibold text-gray-900">
+        {t("dashboard.users.form.titleEdit")}
+      </h1>
 
       <EditUserForm
-      form = {form}
+        form={form}
         initialValues={{ email: data?.email || "", password: "" }}
         onSubmit={handleSubmit}
       />

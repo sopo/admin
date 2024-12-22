@@ -7,11 +7,15 @@ const { Item } = Form;
 interface EditUserFormProps {
   initialValues?: RegisterProps;
   onSubmit: (values: RegisterProps) => void;
-  form: FormInstance
+  form: FormInstance;
 }
 
-const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit, form }) => {
-  const {t} = useTranslation()
+const EditUserForm: React.FC<EditUserFormProps> = ({
+  initialValues,
+  onSubmit,
+  form,
+}) => {
+  const { t } = useTranslation();
 
   return (
     <Form
@@ -24,24 +28,34 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ initialValues, onSubmit, fo
       className="w-full"
     >
       <Item
-        label={t("dashboard.users.form.email")} 
+        label={t("dashboard.users.form.email")}
         name="email"
-        rules={[{ required: true, message:<Trans>dashboard.users.form.required</Trans> }]}
+        rules={[
+          {
+            required: true,
+            message: <Trans>dashboard.users.form.required</Trans>,
+          },
+        ]}
       >
-        <Input placeholder={t("dashboard.users.form.email")}  />
+        <Input placeholder={t("dashboard.users.form.email")} />
       </Item>
 
       <Item
-        label={t("dashboard.users.form.password")} 
+        label={t("dashboard.users.form.password")}
         name="password"
-        rules={[{ required: true, message:<Trans>dashboard.users.form.required</Trans>  }]}
+        rules={[
+          {
+            required: true,
+            message: <Trans>dashboard.users.form.required</Trans>,
+          },
+        ]}
       >
         <Input placeholder={t("dashboard.users.form.password")} />
       </Item>
 
       <Item label={null}>
         <Button type="primary" htmlType="submit" block>
-        {t("dashboard.users.form.cta")} 
+          {t("dashboard.users.form.cta")}
         </Button>
       </Item>
     </Form>
