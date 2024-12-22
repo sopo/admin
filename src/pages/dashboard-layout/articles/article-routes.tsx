@@ -7,19 +7,17 @@ export enum ARTICLES_PATHS {
   ARTICLES = "articles",
   ARTICLES_LIST = "articles-list",
   ARTICLES_EDIT = "edit",
-  ARTICLES_ADD = "add"
+  ARTICLES_ADD = "add",
 }
 
-export const ARTICLES_ROUTES = [{
+export const ARTICLES_ROUTES = [
+  {
     path: ARTICLES_PATHS.ARTICLES,
-    element: (
-        <ArticlesLayout />
-
-    ),
+    element: <ArticlesLayout />,
     children: [
       {
         path: ARTICLES_PATHS.ARTICLES_LIST,
-        element: <Articles/>,
+        element: <Articles />,
       },
       {
         path: ARTICLES_PATHS.ARTICLES_ADD,
@@ -27,8 +25,8 @@ export const ARTICLES_ROUTES = [{
       },
       {
         path: ARTICLES_PATHS.ARTICLES_EDIT + "/:id",
-        element: <EditArticle/>,
-      }
-    ] 
+        element: <EditArticle />,
+      },
+    ],
   },
- ]
+];

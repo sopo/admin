@@ -1,62 +1,58 @@
 import { useForm } from "antd/es/form/Form";
 import { useAtom } from "jotai";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { editArticle } from "@/api/articles/edit-article";
-import { getArticle } from "@/api/articles/get-article";
 import { ArticleProps } from "@/interfaces/types";
 import { UserAtom } from "@/store/auth";
 import ArticleForm from "../components/article-form";
 import { AUTH_PATHS } from "@/pages/authorization-layout/auth.enum";
+import useEditArticle from "@/hooks/use-edit-article";
+import useGetArticle from "@/hooks/use-get-article";
 import { ARTICLES_PATHS } from "../article-routes";
 
-
 const EditArticle: React.FC = () => {
+  const navigate = useNavigate();
   const [user] = useAtom(UserAtom);
   const [form] = useForm();
   const { id } = useParams();
-  const navigate = useNavigate();
-  const mutation = useMutation(
-    (values: ArticleProps) => {
-      if (id) {
-        return editArticle(id, values);
-      }
-      return Promise.reject("no ID found");
-    },
-    {
-      onSuccess: () => {
-        navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`);
-      },
-    }
-  );
-  const { data, isLoading, isError, error } = useQuery(
-    ["article", id],
-    () => (id ? getArticle(id) : Promise.reject("undefined Id")),
-    {
-      enabled: !!id,
-      onSuccess: (articleData) => {
-        form.setFieldsValue({
-          title_ka: articleData?.title_ka,
-          title_en: articleData?.title_en,
-          description_ka: articleData?.description_ka,
-          description_en: articleData?.description_en
-        });
-      },
-    }
-  );
-console.log(data)
+
+  const {
+    mutate,
+    isLoading: isArticleLoading,
+    isError: isArticleError,
+    error: articleError,
+  } = useEditArticle(id || "", () => {
+    navigate(`/${ARTICLES_PATHS.ARTICLES}/${ARTICLES_PATHS.ARTICLES_LIST}`);
+  });
+  const { data, isLoading, isError, error } = useGetArticle({ id });
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (isError) {
     return <div>Error: {error instanceof Error ? error.message : "Error"}</div>;
   }
+  if (isArticleLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isArticleError) {
+    return (
+      <div>
+        Error: {articleError instanceof Error ? articleError.message : "Error"}
+      </div>
+    );
+  }
+
   if (!user) {
     return <Navigate to={AUTH_PATHS.SIGN_IN} />;
   }
 
   const handleSubmit = (values: ArticleProps) => {
-    mutation.mutate(values);
+    if (id) {
+      mutate(values);
+    } else {
+      console.error("undefined id");
+    }
   };
 
   return (
@@ -64,12 +60,13 @@ console.log(data)
       <h1 className="text-xl font-semibold text-gray-900">Edit Article</h1>
 
       <ArticleForm
+        form={form}
         initialValues={{
-            title_ka: data?.title_ka || "", 
-            title_en: data?.title_en || "",
-            description_ka: data?.description_ka || "",
-            description_en: data?.description_en || "",
-          }}
+          title_ka: data?.title_ka || "",
+          title_en: data?.title_en || "",
+          description_ka: data?.description_ka || "",
+          description_en: data?.description_en || "",
+        }}
         onSubmit={handleSubmit}
       />
     </div>

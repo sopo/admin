@@ -1,24 +1,25 @@
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
-import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import { AuthProps } from "@/interfaces/interfaces";
-import { login } from "@/api/authorization";
-
+import useSignIn from "@/hooks/use-sign-in";
 
 const SignIn: React.FC = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutate: handleLogin } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: login,
-    onSuccess: () => {
-      navigate(`/`);
-    },
-    onError: (error) => {
-      console.error("Login failed", error);
-    },
+  // const { mutate: handleLogin } = useMutation({
+  //   // mutationKey: ["login"],
+  //   mutationFn: login,
+  //   onSuccess: () => {
+  //     navigate(`/`);
+  //   },
+  //   onError: (error) => {
+  //     console.error("Login failed", error);
+  //   },
+  // });
+  const { mutate: handleLogin } = useSignIn(() => {
+    navigate("/");
   });
   const onFinish: FormProps<AuthProps>["onFinish"] = (values) => {
     handleLogin(values);
@@ -32,7 +33,9 @@ const SignIn: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center mx-auto my-5 md:my-20 w-96">
-      <h1 className="text-xl font-semibold text-gray-900">{t("signIn.title")}</h1>
+      <h1 className="text-xl font-semibold text-gray-900">
+        {t("signIn.title")}
+      </h1>
       <Form
         name="basic"
         initialValues={{ remember: true }}
@@ -53,7 +56,7 @@ const SignIn: React.FC = () => {
         <Form.Item<AuthProps>
           label={t("signIn.password")}
           name="password"
-          rules={[{ required: true, message: <Trans>signIn.required</Trans>}]}
+          rules={[{ required: true, message: <Trans>signIn.required</Trans> }]}
         >
           <Input.Password />
         </Form.Item>
@@ -67,7 +70,7 @@ const SignIn: React.FC = () => {
         </Form.Item>
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" block>
-          {t("signIn.cta")}
+            {t("signIn.cta")}
           </Button>
         </Form.Item>
       </Form>

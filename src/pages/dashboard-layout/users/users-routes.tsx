@@ -10,7 +10,7 @@ export enum USERS_PATHS {
   USERS = "users",
   USERS_LIST = "user-list",
   USERS_EDIT = "edit",
-  USERS_ADD = "add"
+  USERS_ADD = "add",
 }
 
 export const USERS_ROUTES = [
@@ -18,7 +18,7 @@ export const USERS_ROUTES = [
     path: "/",
     element: (
       <Suspense fallback={Loader}>
-        <Navigate to={USERS_PATHS.USERS} />
+        <Navigate to={`${USERS_PATHS.USERS}/${USERS_PATHS.USERS_LIST}`} />
       </Suspense>
     ),
   },
@@ -50,7 +50,6 @@ export const USERS_ROUTES = [
           </Suspense>
         ),
       },
-    ]
+    ],
   },
- 
 ];

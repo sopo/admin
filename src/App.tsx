@@ -1,21 +1,23 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./navigation/routes/routes";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { UserAtom } from "./store/auth";
 import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
-const queryClient = new QueryClient();
+import useGetUserSession from "./hooks/use-get-user-session";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const setUser = useSetAtom(UserAtom);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+  useGetUserSession((session) => {
+    if (session) {
       setUser(session);
-      setLoading(false);
-    });
+    }
+    setLoading(false);
+  });
 
+  useEffect(() => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -24,16 +26,11 @@ function App() {
 
     return () => subscription.unsubscribe();
   }, [setUser]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
-  return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
